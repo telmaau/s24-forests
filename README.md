@@ -20,3 +20,6 @@ Topic modeling forest discussions in Suomi24
 | Multilingual       |   UMAP  | K-means |
 | Multilingual       |   PCA  | HDBSCAN |
 | Multilingual       |   PCA  | K-means |
+
+
+4. add something
