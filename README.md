@@ -1,10 +1,10 @@
 # s24-forests
-Topic modeling forest discussions in Suomi24
+Topic modeling forest discussions on Suomi24.
 
 ## Workflow
 
 1. Collect all posts that contain a lemma from the [search word](metsäsanat_v2.xlsx) list.
-- [code/compileCorpus_csv.py](./code/compileCorpus_csv.py) creates a
+- [code/compileCorpus_csv.py](./code/compileCorpus_csv.py) creates a csv file from the posts with metadata and lemmatized text.
 - the collected corpus can be found here: (add link)
 
 2. Estimate the number of topics for topic models using K-means.
