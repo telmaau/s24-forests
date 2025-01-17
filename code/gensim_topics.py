@@ -22,7 +22,6 @@ from gensim.models import TfidfModel
 fpath=sys.argv[1] # path to the csv file
 
 
-#print(f'Topic analysis for suomi24. \nUsing {topics} topics from <= {amount} suffled documents, with classes where num_examples < {limit} is marked separately.')
 print('Using lemmas from suomi24 data. Lowercased, numbers removed and punctuation cleaned.')
 print(f'Data from {fpath}.\n')
 
@@ -172,7 +171,7 @@ print("no below 5, no above .99")
 bow_corpus = [gensim_dictionary.doc2bow(text, allow_update=False) for text in texts]
 id_words = [[(gensim_dictionary[id], count) for id, count in line] for line in bow_corpus]
 
-# tf idf
+# tf idf, alternative to bow
 tfidf_model = TfidfModel(bow_corpus)
 tfidf_corpus = tfidf_model[bow_corpus]
 
@@ -182,28 +181,28 @@ num_words = len(gensim_dictionary)
 print(f'Number of words in the dictionary: {num_words}')
 
 
-# save them
+# save them if you want
 from gensim.corpora import MmCorpus
 #DICT_PATH="/scratch/project_2008526/telmap/suomi24/models/s24_topicmodel_gensim_tfidf.dict"
 CORPUS_PATH="/scratch/project_2008526/telmap/suomi24/models/s24_topicmodel_gensim_tfidf.mm"
 #gensim_dictionary.save(DICT_PATH)
-MmCorpus.serialize(CORPUS_PATH, tfidf_corpus)
+#MmCorpus.serialize(CORPUS_PATH, tfidf_corpus)
 
 
 
-# %%
+# use LDAmulticore  for faster processing
 from pprint import pprint
 from gensim.models import LdaMulticore
 # initiate the model
 
-#/users/telmpeur/suomi24/.venv/bin/python3.9
+
 ## loop with different nr of topics:
 from gensim.test.utils import datapath
-path="/scratch/project_2008526/telmap/suomi24"
+path= "folder-path" # path to the folder where you want to save the models
 
 from gensim.models.coherencemodel import CoherenceModel
 
-#param_dict= {'alpha': 0.2, 'decay': 0.55, 'offset': 1024, 'eta': 'auto', 'gamma_threshold': 0.0004, 'minimum_probability': 0.0005}
+# hyperparams
 param_dict={'alpha':"asymmetric" , 'decay': 0.50001, 'offset': 64, 'eta': None, 'gamma_threshold': 0.0008, 'minimum_probability': 0.02}
 print(param_dict)
 print("passes 30, iterations 50 \n")
