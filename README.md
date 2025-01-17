@@ -3,8 +3,9 @@ Topic modeling forest discussions in Suomi24
 
 ## Workflow
 
-1. Collect all posts that contain a lemma from the search word list.
-- the collected corpus can be found here:
+1. Collect all posts that contain a lemma from the [search word list](metsäsanat_v2.xlsx) list.
+- [code/compileCorpus_csv.py](compileCorpus_csv.py) creates a
+- the collected corpus can be found here: (add link)
 
 2. Estimate the number of topics for topic models using K-means.
 
