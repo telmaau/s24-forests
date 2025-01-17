@@ -26,3 +26,6 @@ Topic modeling forest discussions on Suomi24.
 4. Model evaluation
 - The topic keywords were human-annotated as (good/satisfactory/unsatisfactory) for coherence.
 - See an example notebook of model evaluation: [code/bertopic_finnish_umap_kmeans_analysis_clean.ipynb](./´code/bertopic_finnish_umap_kmeans_analysis_clean.ipynb)
+
+## Research
+This repository is part of [SeedLING](https://sites.utu.fi/seedling/) project.
