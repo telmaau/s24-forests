@@ -26,6 +26,7 @@ Topic modeling forest discussions on Suomi24.
 
 4. Model evaluation
 - The topic keywords were human-annotated as (good/satisfactory/unsatisfactory) for coherence.
+- The models are saved with pickle and safetensors. (See differences in https://maartengr.github.io/BERTopic/getting_started/serialization/serialization.html). Safetensors is lighter but does not save the submodels (umap, kmeans etc., so if you want to fine-tune the models further, picklemodel is recommended. To just explore the models, both version work just great.
 - See an example notebook of model evaluation: [code/bertopic_finnish_umap_kmeans_analysis_clean.ipynb](./´code/bertopic_finnish_umap_kmeans_analysis_clean.ipynb)
 
 ## Research
