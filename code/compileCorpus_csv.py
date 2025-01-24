@@ -14,10 +14,14 @@ import pandas as pd
 
 # functions
 def clean_id(idline):
+    """
+    This function cleans the metadata line from the conll file
+    that usually begins like that:
+    ###C: <text comment_id=59203728 date=2013-01-03 datetime=2013-01-03 13:02:01 author=päästä parent_comment_id=0
+    to collect the necessary info from it
+    (my original idea was to save these as a dictionary, but due to some bugs it doesn't really work..)
+    """
     cleaned_idline= idline.replace('"', '').replace("'", '')
-    # date="2018-01-01"
-    # id="15127813:0"
-    # datetime="2018-01-01 00:00:00"
     textlist = cleaned_idline.split()
     
     id_dict={"date":"","id":"","comment_id":"","time":"", "parent_id":"","author":"","text":""}
@@ -44,10 +48,10 @@ def clean_id(idline):
     return cleaned_idline, id_dict
     
 
-# save wanted posts
+# save wanted posts as a csv file
 def save_csv(meta,conll, filename):
 
-    spath=filename.replace(".conll.gz","_text2.csv")    
+    spath=filename.replace(".conll.gz","v1.csv")
     # append to file
     with gzip.open(filename, 'at', encoding='utf-8') as f:
         # first write the id line that contains information about the post
@@ -108,7 +112,7 @@ def parse_gzip_conll(dat):
 # a function to check if any tokens in the post match our search words
 def wordSearch(file, topicwords, fname):
     counter = 0
-    fpath = "/scratch/project_2008526/telmap/suomi24/corpus/"
+    fpath = "../data" # path to the folder where to save the data
 
     if not os.path.exists(fpath):
         os.mkdir(fpath)
@@ -145,8 +149,10 @@ def wordSearch(file, topicwords, fname):
 
 print("Starting the collection: \n ")
 
-#%%
+#input datalist with all the original conll.gz files (one per year)
 datalist = glob.glob("/scratch/project_2008526/eltuom/suomi24_conllu_folders/alkuperaiset/*")
+
+#save with this filename
 fname="/scratch/project_2008526/telmap/suomi24/corpus/s24_metsa_actors_new.conll.gz"
 
 ## create csv where to append metadata
@@ -163,23 +169,23 @@ df = pd.DataFrame(columns=["text","info","lemmas"])
 df.to_csv(spath, mode='w', index=False, encoding='utf-8', sep="\t")
 
 # topic words
-
 tpath="/scratch/project_2008526/telmap/suomi24/metsa_hakusanat.csv"
 topic_df=pd.read_csv(tpath, sep="\t")
-
 topicwords= list(topic_df["sana"])
+
+# print topic words
 print("Using words:")
 for tword in topicwords:
     print(tword)
 print("\n")
 
-#%%
+# run
 for d in datalist:
     year=d.split("s24_")[1]
     yearpattern= r'([0-9]{4})'
     ymatch=re.search(yearpattern,year)
     y=ymatch.group(0)
     
-    if int(y) > 2010:
+    if int(y) > 2010: # I didn't take years before 2010
         print(y+":",d)
         wordSearch(d, topicwords, fname)

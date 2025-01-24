@@ -138,7 +138,7 @@ df2.sort_values(by="date",ascending=True, inplace=True)
 #df2.to_csv(fpath.replace(".csv","len2.csv"), sep="\t",index=False)
 
 # read in train data
-trainpath= "/scratch/project_2008526/telmap/suomi24/corpus/s24_metsa_actors_new_text2len_train.csv"
+trainpath= "/scratch/project_2008526/telmap/suomi24/corpus/s24_forest_train.csv"
 df = pd.read_csv(trainpath, sep="\t")
 documents=list(df["text_preprocessed"].drop_duplicates())
 print("Training on", len(documents), "documents. \n")
@@ -152,8 +152,6 @@ texts= [d.split() for d in documents]
 
 #print("nr of docs, len > 5 tokens:", len(texts))
 print("\n")
-
-
 
 
 print(f'---------------------------\nStarting to build the model')
@@ -183,8 +181,8 @@ print(f'Number of words in the dictionary: {num_words}')
 
 # save them if you want
 from gensim.corpora import MmCorpus
-#DICT_PATH="/scratch/project_2008526/telmap/suomi24/models/s24_topicmodel_gensim_tfidf.dict"
-CORPUS_PATH="/scratch/project_2008526/telmap/suomi24/models/s24_topicmodel_gensim_tfidf.mm"
+#DICT_PATH="your-path-to/s24_topicmodel_gensim_bow.dict"
+#CORPUS_PATH="your-path-to/s24_topicmodel_gensim_bow.mm"
 #gensim_dictionary.save(DICT_PATH)
 #MmCorpus.serialize(CORPUS_PATH, tfidf_corpus)
 
@@ -198,7 +196,7 @@ from gensim.models import LdaMulticore
 
 ## loop with different nr of topics:
 from gensim.test.utils import datapath
-path= "folder-path" # path to the folder where you want to save the models
+path= "your-folder-path" # path to the folder where you want to save the models
 
 from gensim.models.coherencemodel import CoherenceModel
 

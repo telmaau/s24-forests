@@ -4,7 +4,8 @@ Topic modeling forest discussions on Suomi24.
 ## Workflow
 
 1. Collect all posts that contain a lemma from the [search word](metsäsanat_v2.xlsx) list.
-- [code/compileCorpus_csv.py](./code/compileCorpus_csv.py) creates a csv file from the posts with metadata and lemmatized text.
+- [code/compileCorpus_csv.py](./code/compileCorpus_csv.py) creates a conll and a csv file from the posts with metadata and lemmatized text.
+    - There are two almost identical versions of the csv file, and I'm not sure why.. I merged them as shown in the data_prep.ipynb, and used the resulting dataset in topic model training.
 - the collected corpus can be found here: (add link)
 
 2. Estimate the number of topics for topic models using K-means.

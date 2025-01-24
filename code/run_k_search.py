@@ -1,5 +1,4 @@
-# script to train bertopic models
-from nltk.corpus import stopwords
+# script to find an optimal k value for kmeans topic models
 from bertopic import BERTopic
 import pandas as pd
 import sys
@@ -69,9 +68,9 @@ import h5py
 # load in embeddings
 
 if embedding_model == 'TurkuNLP/sbert-cased-finnish-paraphrase':
-    epath="/scratch/project_2008526/telmap/suomi24/new_embeddings.h5"
+    epath="../data/turkunlp_train_embeddings.h5"
     if not os.path.isfile(epath):
-        
+        # if embeddings do not exist, create them
         print("creating embeddings")
         em= 'TurkuNLP/sbert-cased-finnish-paraphrase'
         model = SentenceTransformer(em)
@@ -84,7 +83,7 @@ if embedding_model == 'TurkuNLP/sbert-cased-finnish-paraphrase':
             embeddings = f["embeddings"][:]
             
 elif embedding_model == 'sentence-transformers/paraphrase-xlm-r-multilingual-v1':
-    epath="/scratch/project_2008526/telmap/suomi24/xlm_train_embeddings.h5"
+    epath="../data/xlm_train_embeddings.h5"
     if not os.path.isfile(epath):
         print("Creating embeddings")
         em= 'sentence-transformers/paraphrase-xlm-r-multilingual-v1'
