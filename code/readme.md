@@ -1,7 +1,7 @@
 # Code instructions
 You can replicate the study by running
 1) corpus.sh to compile the corpus from raw s24 data files
-2) run_k_search.sh to estimate the k number of topics used in kmeans models.
+2) run_k_search.sh to estimate the k number of topics used in the kmeans models.
 3) run_bert_topics.sh to train BERTopic models.
 
 
